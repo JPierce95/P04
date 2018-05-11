@@ -3,15 +3,14 @@
 #include <iostream>
 #include "Store.h"
 
-void buyTicket();
-void buySnacks();
-void editCheckout();
-void buyer(bool);
-
-Store theatre;
+void buyTicket(Store&);
+void buySnacks(Store&);
+void editCheckout(Store&);
+void buyer(bool, Store&);
 
 int main()
 {
+    Store theatre;
     char input = ' ';
     do
     {
@@ -25,15 +24,15 @@ int main()
         }  
         else if(tolower(input) == 'a')
         {
-            buyTicket();
+            buyTicket(theatre);
         }
         else if(tolower(input) == 'b')
         {
-            buySnacks();
+            buySnacks(theatre);
         }
         else if(tolower(input) == 'c')
         {
-            editCheckout();
+            editCheckout(theatre);
         }
     }
     while(!(tolower(input) == 'q'));
@@ -43,7 +42,7 @@ int main()
     return 0;
 }
 
-void buyTicket()
+void buyTicket(Store &theatre)
 {
     char input = ' ';
     do
@@ -62,13 +61,13 @@ void buyTicket()
         }
         else if(tolower(input) == 'b')
         {
-            buyer(true);
+            buyer(true, theatre);
         }
     }
     while(tolower(input) != 'q');
 }
 
-void buySnacks()
+void buySnacks(Store &theatre)
 {
     char input = ' ';
     do
@@ -87,13 +86,13 @@ void buySnacks()
         }
         else if(tolower(input) == 'b')
         {
-            buyer(false);
+            buyer(false, theatre);
         }
     }
     while(tolower(input) != 'q');
 }
 
-void editCheckout()
+void editCheckout(Store &theatre)
 {
     char input = ' ';
     if(theatre.getCheckoutSize() == 0) //Checks to see if there's even anyhing in checkout
@@ -145,7 +144,7 @@ void editCheckout()
     }
 }
 
-void buyer(bool addMovie)
+void buyer(bool addMovie, Store &theatre)
 {
     int purchase = 0;
     do
